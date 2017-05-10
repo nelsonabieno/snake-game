@@ -6,7 +6,7 @@ class Cell extends React.Component{
   constructor(props){
     super(props);
     this.snakeHead = 0;
-    this.foodPosition = 50;
+    this.foodPosition=50;
     this.state = { color : 'white'};
     this.startGame = this.startGame.bind(this);
   }
@@ -45,8 +45,6 @@ class Cell extends React.Component{
       </div>
     );
   }
-
-
 }
 
 export default Cell;
