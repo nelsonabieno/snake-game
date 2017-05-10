@@ -5,23 +5,21 @@ import './App.css';
 class Cell extends React.Component{
   constructor(props){
     super(props);
-    this.snakeHead = 0;
-    this.foodPosition=50;
-    this.state = { color : 'white'};
+    this.foodPosition = 50;
+    this.state = { color : 'white', snakeHead: 0};
     this.startGame = this.startGame.bind(this);
   }
   startGame(){
     window.setInterval(() =>{
-      this.startGame();
-    }, 1000);
-    if (this.snakeHead < 99) {
-      this.snakeHead ++;
+    if (this.state.snakeHead < 99) {
+      this.setState({snakeHead: this.state.snakeHead+1});
+      return 'this is my snakehead';
     } else {
-      this.snakeHead = 0;
+      this.setState({snakeHead: 0});
     }
-    if (this.snakeHead === this.foodPosition) {
+    if (this.state.snakeHead === this.foodPosition) {
       return 'Snake have eaten the food';
-    }
+    }},500);
     this.setState({color: 'purple'});
   }
   render(){
@@ -32,8 +30,7 @@ class Cell extends React.Component{
           if (index === this.foodPosition){
             return  <div className="col s2 gameCell red darken-1" key={index} id={'cellId'+index}> {index} </div>
           }
-          else if (index === this.snakeHead){
-
+          else if (index === this.state.snakeHead){
             return  <div className="col s2 gameCell light-blue darken-4" key={index} id={'cellId'+index}> {index} </div>
           }
           else {
