@@ -7,8 +7,12 @@ class Cell extends React.Component{
     super(props);
     this.startGame = this.startGame.bind(this);
     this.getKeyDirection = this.getKeyDirection.bind(this);
-    this.foodPosition = 50;
-    this.state = { color : 'white', snakeHead: 0, direction: ''};
+    this.state = {  color : 'white',
+                    snakeHead: 0,
+                    direction: '',
+                    foodPosition:50,
+                    score:0
+                  };
   }
   getKeyDirection(event){
      switch(event.keyCode){
@@ -17,14 +21,16 @@ class Cell extends React.Component{
           snakeHead: this.state.snakeHead-1});
           break;
         case 38:
-          this.setState({direction :'up',});
+          this.setState({direction :'up',
+          snakeHead: this.state.snakeHead-10});
           break;
         case 39:
           this.setState({direction :'right',
           snakeHead: this.state.snakeHead+1});
           break;
         case 40:
-          this.setState({direction :'down'});
+          this.setState({direction :'down',
+          snakeHead: this.state.snakeHead+10});
           break;
       }
   }
@@ -41,7 +47,7 @@ class Cell extends React.Component{
       if (this.state.snakeHead === this.foodPosition) {
         return 'Snake have eaten the food';
       }
-    },500);
+    },1500);
     this.setState({color: 'purple'});
   }
   render(){
