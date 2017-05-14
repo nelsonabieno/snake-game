@@ -10,7 +10,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React Snake Game </h2>
-          <div className="board" onClick={console.log('you click board div')} onKeyDown={(e)=>{console.log(e.keyCode,'you press keydown')}}>
+          <div className="board">
             <Cell units={this.boxArray()}/>
           </div>
         </div>

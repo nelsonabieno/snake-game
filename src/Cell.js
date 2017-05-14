@@ -10,8 +10,8 @@ class Cell extends React.Component{
     this.state = {  color : 'white',
                     snakeHead: 0,
                     direction: '',
-                    foodPosition:50,
-                    score:0
+                    foodPosition: 50,
+                    score: 0
                   };
   }
   getKeyDirection(event){
@@ -36,7 +36,6 @@ class Cell extends React.Component{
   }
 
   startGame(){
-    console.log(this.state,"This is my state in startgame");
     window.setInterval(() =>{
       if (this.state.snakeHead < 99) {
         this.setState({snakeHead: this.state.snakeHead+1});
@@ -44,10 +43,11 @@ class Cell extends React.Component{
       } else {
         this.setState({snakeHead: 0});
       }
-      if (this.state.snakeHead === this.foodPosition) {
-        return 'Snake have eaten the food';
+      if (this.state.snakeHead === this.state.foodPosition) {
+        this.setState({foodPosition: Math.floor(Math.random() * 99) + 1});
+        return;
       }
-    },1500);
+    },500);
     this.setState({color: 'purple'});
   }
   render(){
@@ -55,7 +55,7 @@ class Cell extends React.Component{
     return (
       <div>
       { boxes.map((box,index)=>{
-          if (index === this.foodPosition){
+          if (index === this.state.foodPosition){
             return  <div className="col s2 gameCell red darken-1" key={index} id={'cellId'+index}> {index} </div>
           }
           else if (index === this.state.snakeHead){
