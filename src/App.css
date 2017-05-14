@@ -42,3 +42,11 @@ body{
   height: 120px;
   font-size: 80px;
 }
+
+.powerId{
+  font-size: 125px !important;
+}
+
+.timerId {
+   font-size : 50px !important;
+}

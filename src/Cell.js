@@ -8,10 +8,13 @@ class Cell extends React.Component{
     this.startGame = this.startGame.bind(this);
     this.getKeyDirection = this.getKeyDirection.bind(this);
     this.state = {  color : 'white',
-                    snakeHead: 0,
+                    snakeHead: [0,1],
                     direction: '',
                     foodPosition: 50,
-                    score: 0
+                    score: 0,
+                    tail: [],
+                    total: 0,
+                    timer: 0
                   };
   }
   getKeyDirection(event){
@@ -39,6 +42,7 @@ class Cell extends React.Component{
     window.setInterval(() =>{
       if (this.state.snakeHead >= 0 && this.state.snakeHead < 99) {
         this.setState({snakeHead: this.state.snakeHead+1});
+        this.setState({timer: this.state.timer + 1});
         window.addEventListener("keydown",this.getKeyDirection , false);
       } else {
         this.setState({snakeHead: 0});
@@ -46,8 +50,6 @@ class Cell extends React.Component{
       if (this.state.snakeHead === this.state.foodPosition) {
         this.setState({foodPosition: Math.floor(Math.random() * 99) + 1});
         this.setState({score: this.state.score + 5});
-        // total ++ and tail is an []
-        //return;
       }
     },500);
     this.setState({color: 'purple'});
@@ -56,7 +58,7 @@ class Cell extends React.Component{
     let boxes=this.props.units;
     return (
       <div>
-       <h1> Score : {this.state.score} </h1>
+       <h1> <i className="material-icons timerId">timer</i> {this.state.timer} &nbsp; &nbsp; Score: {this.state.score} </h1>
         <div>
           { boxes.map((box,index)=>{
               if (index === this.state.foodPosition){
@@ -70,7 +72,7 @@ class Cell extends React.Component{
               }
           })
           }
-          <a className="cyan darken-4 waves-effect waves-light board startBtn" onClick={this.startGame}>START</a>
+          <a className="cyan darken-4 waves-effect waves-light board startBtn" onClick={this.startGame}><i className="material-icons powerId">power_settings_new</i></a>
         </div>
       </div>
     );
