@@ -7,4 +7,3 @@ coverage
 .coveralls.yml
 .vscode
 .env
-reports
