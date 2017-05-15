@@ -8,7 +8,7 @@ class Cell extends React.Component{
     this.startGame = this.startGame.bind(this);
     this.getKeyDirection = this.getKeyDirection.bind(this);
     this.state = {  color : 'white',
-                    snakeHead: [0,1],
+                    snakeHead: 0,
                     direction: '',
                     foodPosition: 50,
                     score: 0,
@@ -50,9 +50,9 @@ class Cell extends React.Component{
       if (this.state.snakeHead === this.state.foodPosition) {
         this.setState({foodPosition: Math.floor(Math.random() * 99) + 1});
         this.setState({score: this.state.score + 5});
+        this.setState({total: this.state.total +1});
       }
     },500);
-    this.setState({color: 'purple'});
   }
   render(){
     let boxes=this.props.units;
@@ -62,17 +62,17 @@ class Cell extends React.Component{
         <div>
           { boxes.map((box,index)=>{
               if (index === this.state.foodPosition){
-                return  <div className="col s2 gameCell red darken-1" key={index} id={'cellId'+index}> {index} </div>
+                return  <div className="col s2 gameCell red darken-1" key={index} id={'cellId'+index}> </div>
               }
-              else if (index === this.state.snakeHead){
-                return  <div className="col s2 gameCell light-blue darken-4" key={index} id={'cellId'+index}> {index} </div>
+              if (index === this.state.snakeHead){
+                return  <div className="col s2 gameCell light-blue darken-4" key={index} id={'cellId'+index}> </div>
               }
               else {
-                return  <div className="col s2 gameCell teal lighten-3" key={index} id={'cellId'+index}> {index} </div>
+                return  <div className="col s2 gameCell teal lighten-3" key={index} id={'cellId'+index}> </div>
               }
           })
           }
-          <a className="cyan darken-4 waves-effect waves-light board startBtn" onClick={this.startGame}><i className="material-icons powerId">power_settings_new</i></a>
+          <a className="cyan darken-4 waves-effect waves-light board startBtn" onClick={this.startGame}>START</a>
         </div>
       </div>
     );
